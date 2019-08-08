@@ -1,0 +1,124 @@
+import ij.IJ; 
+import ij.ImageJ;
+import ij.ImagePlus;
+import ij.gui.Roi;
+import ij.gui.WaitForUserDialog;
+import ij.plugin.PlugIn;
+import ij.plugin.frame.RoiManager;
+import ij.gui.PointRoi;
+
+mm.getScriptController().clearMessageWindow(); 
+
+//read current offset values for scanner and re-scanner
+double offset_Sx=Double.parseDouble(mmc.getProperty("RCM", "S3 Offset scan X"));
+double offset_Sy=Double.parseDouble(mmc.getProperty("RCM", "S4 Offset scan Y"));
+double offset_Rx=Double.parseDouble(mmc.getProperty("RCM", "S5 Offset rescan X"));
+double offset_Ry=Double.parseDouble(mmc.getProperty("RCM", "S6 Offset rescan Y"));
+double old_FOVx=Double.parseDouble(mmc.getProperty("RCM","C2 Field of view x"));
+double old_FOVy=Double.parseDouble(mmc.getProperty("RCM","C2 Field of view y"));
+
+double pos0_0_Sx;double pos0_0_Sy;
+double pos0_0_Rx;double pos0_0_Ry;
+double new_offset_Sx=offset_Sx;
+double new_offset_Sy=offset_Sy;
+double new_offset_Rx=offset_Rx;
+double new_offset_Ry=offset_Ry;
+mmc.setProperty("RCM","C2 Field of view x","32");
+mmc.setProperty("RCM","C2 Field of view y","32");
+mmc.setProperty("RCM","S3 Offset scan X",new_offset_Sx);
+mmc.setProperty("RCM","S4 Offset scan Y",new_offset_Sy);
+mmc.setProperty("RCM","S5 Offset rescan X",new_offset_Rx);
+mmc.setProperty("RCM","S6 Offset rescan Y",new_offset_Ry);
+mm.live().snap(true);
+//ImagePlus imp = IJ.getImage();
+IJ.run("Gaussian Blur...", "sigma=10");
+IJ.run("Find Maxima...", "noise=200 output=[Point Selection]"); 
+//getSelectionCoordinates(x, y);
+//print(x[0]+" "+y[0]);
+ImagePlus imp = IJ.getImage();
+Rectangle pos00 = imp.getRoi().getBounds();
+
+
+double pos1_0_Sx;
+double pos1_0_Sy;
+double pos1_0_Rx;
+double pos1_0_Ry;
+
+double new_offset_Sx=offset_Sx+1;
+double new_offset_Sy=offset_Sy;
+double new_offset_Rx=offset_Rx+1;
+double new_offset_Ry=offset_Ry;
+mmc.setProperty("RCM","C2 Field of view x","32");
+mmc.setProperty("RCM","C2 Field of view y","32");
+mmc.setProperty("RCM","S3 Offset scan X",new_offset_Sx);
+mmc.setProperty("RCM","S4 Offset scan Y",new_offset_Sy);
+mmc.setProperty("RCM","S5 Offset rescan X",new_offset_Rx);
+mmc.setProperty("RCM","S6 Offset rescan Y",new_offset_Ry);
+mm.live().snap(true);
+
+IJ.run("Gaussian Blur...", "sigma=10");
+IJ.run("Find Maxima...", "noise=200 output=[Point Selection]"); 
+//getSelectionCoordinates(x, y);
+//print(x[0]+" "+y[0]);
+ImagePlus imp = IJ.getImage();
+Rectangle pos10 = imp.getRoi().getBounds();
+
+double pos0_1_Sx;
+double pos0_1_Sy;
+double pos0_1_Rx;
+double pos0_1_Ry;
+
+double new_offset_Sx=offset_Sx;
+double new_offset_Sy=offset_Sy+1;
+double new_offset_Rx=offset_Rx;
+double new_offset_Ry=offset_Ry+1;
+mmc.setProperty("RCM","C2 Field of view x","32");
+mmc.setProperty("RCM","C2 Field of view y","32");
+mmc.setProperty("RCM","S3 Offset scan X",new_offset_Sx);
+mmc.setProperty("RCM","S4 Offset scan Y",new_offset_Sy);
+mmc.setProperty("RCM","S5 Offset rescan X",new_offset_Rx);
+mmc.setProperty("RCM","S6 Offset rescan Y",new_offset_Ry);
+mm.live().snap(true);
+
+IJ.run("Gaussian Blur...", "sigma=10");
+IJ.run("Find Maxima...", "noise=200 output=[Point Selection]"); 
+//getSelectionCoordinates(x, y);
+//print(x[0]+" "+y[0]);
+ImagePlus imp = IJ.getImage();
+Rectangle pos01 = imp.getRoi().getBounds();
+
+
+double m1=pos10.x-pos00.x;
+double m2=pos01.x-pos00.x;
+double m3=pos10.y-pos00.y;
+double m4=pos01.y-pos00.y;
+det_m=m1*m4-m2*m3;
+double camera_x=pos00.x;
+double camera_y=pos00.y;
+print("\nm1 = "+m1);print("m2 = "+m2);print("m3 = "+m3);print("m4 = "+m4);
+print("Camera x = "+camera_x);print("Camera y = "+camera_y);
+/*
+double new_offset_Sx=offset_Sx+(m4*(Roi_x-camera_x)-m2*(Roi_y-camera_y))/det_m;
+double new_offset_Sy=offset_Sy+(-m3*(Roi_x-camera_x)+m1*(Roi_y-camera_y))/det_m;
+double new_offset_Rx=offset_Rx+1.5*(new_offset_Sx-offset_Sx);
+double new_offset_Ry=offset_Ry+1.5*(new_offset_Sy-offset_Sy);
+print(new_offset_Sx);print(new_offset_Sy);print(new_offset_Rx);print(new_offset_Ry);
+print(offset_Sx);print(Roi_x);print(camera_x);print(Roi_y);print(camera_y);print(det_m);
+print("\nEOF");
+//mmc.serProperty("RCM","S1 Amplitude scan X", "2.4");
+//mmc.serProperty("RCM","S2 Amplitude scan Y", "2.05");
+mmc.setProperty("RCM","C2 Field of view x",oldRoi.width);
+mmc.setProperty("RCM","C2 Field of view y",oldRoi.height);
+mmc.setProperty("RCM","S3 Offset scan X",new_offset_Sx);
+mmc.setProperty("RCM","S4 Offset scan Y",new_offset_Sy);
+mmc.setProperty("RCM","S5 Offset rescan X",new_offset_Rx);
+mmc.setProperty("RCM","S6 Offset rescan Y",new_offset_Ry);
+mm.live().snap(true);
+*/
+mmc.setProperty("RCM","S3 Offset scan X",offset_Sx);
+mmc.setProperty("RCM","S4 Offset scan Y",offset_Sy);
+mmc.setProperty("RCM","S5 Offset rescan X",offset_Rx);
+mmc.setProperty("RCM","S6 Offset rescan Y",offset_Ry);
+mmc.setProperty("RCM","C2 Field of view x","old_FOVx");
+mmc.setProperty("RCM","C2 Field of view y","old_FOVy");
+
