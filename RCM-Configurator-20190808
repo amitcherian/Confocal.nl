@@ -1,0 +1,305 @@
+mmcorej.StrVector Devices=mmc.getLoadedDevices();
+for (int i=0; i<Devices.size(); i++) {
+	String device = Devices.get(i);
+print("\nConfiguring..."+device);
+//print(device);
+//Device,RCM,RCM_NIDAQ-PCIe,RCM
+void rcm(){ 
+		
+//# Group: 488
+		mmc.defineConfig("488 %","NewPreset","RCM","L6.2 Laser 2 power","0");
+		mmc.defineConfig("Channel","488","RCM","L5 Laser Wavelength","0.4880");
+		mmc.defineConfig("Channel","488","RCM","L4.1 Laser 1 select","0");
+		mmc.defineConfig("Channel","488","RCM","L4.2 Laser 2 select","1");
+		mmc.defineConfig("Channel","488","RCM","L4.3 Laser 3 select","0");
+		mmc.defineConfig("Channel","488","RCM","L4.4 Laser 4 select","0");
+
+//# Group: 561
+		mmc.defineConfig("561 %","NewPreset","RCM","L6.3 Laser 3 power","0");
+		mmc.defineConfig("Channel","561","RCM","L5 Laser Wavelength","0.5610");
+		mmc.defineConfig("Channel","561","RCM","L4.1 Laser 1 select","0");
+		mmc.defineConfig("Channel","561","RCM","L4.2 Laser 2 select","0");
+		mmc.defineConfig("Channel","561","RCM","L4.3 Laser 3 select","1");
+		mmc.defineConfig("Channel","561","RCM","L4.4 Laser 4 select","0");
+		
+//# Group: 640 
+		mmc.defineConfig("640 %","NewPreset","RCM","L6.4 Laser 4 power","0");
+		mmc.defineConfig("Channel","640","RCM","L5 Laser Wavelength","0.6400");
+		mmc.defineConfig("Channel","640","RCM","L4.1 Laser 1 select","0");
+		mmc.defineConfig("Channel","640","RCM","L4.2 Laser 2 select","0");
+		mmc.defineConfig("Channel","640","RCM","L4.3 Laser 3 select","0");
+		mmc.defineConfig("Channel","640","RCM","L4.4 Laser 4 select","1");
+//# Group: 785			
+		mmc.defineConfig("785 %","NewPreset","RCM","L6.1 Laser 1 power","0");
+		mmc.defineConfig("Channel","785","RCM","L5 Laser Wavelength","0.7850");
+		mmc.defineConfig("Channel","785","RCM","L4.1 Laser 1 select","1");
+		mmc.defineConfig("Channel","785","RCM","L4.2 Laser 2 select","0");
+		mmc.defineConfig("Channel","785","RCM","L4.3 Laser 3 select","0");
+		mmc.defineConfig("Channel","785","RCM","L4.4 Laser 4 select","0");
+		
+//Group: Blue Bypass %
+		mmc.defineConfig("Channel","Blue-Bypass","RCM","L5 Laser Wavelength","0.6400");
+		mmc.defineConfig("Channel","Blue-Bypass","RCM","L4.1 Laser 1 select","0");
+		mmc.defineConfig("Channel","Blue-Bypass","RCM","L4.2 Laser 2 select","0");
+		mmc.defineConfig("Channel","Blue-Bypass","RCM","L4.3 Laser 3 select","0");
+		mmc.defineConfig("Channel","Blue-Bypass","RCM","L4.4 Laser 4 select","1");
+//Group: Green Bypass %
+		mmc.defineConfig("Channel","Green-Bypass","RCM","L5 Laser Wavelength","0.6400");
+		mmc.defineConfig("Channel","Green-Bypass","RCM","L4.1 Laser 1 select","0");
+		mmc.defineConfig("Channel","Green-Bypass","RCM","L4.2 Laser 2 select","0");
+		mmc.defineConfig("Channel","Green-Bypass","RCM","L4.3 Laser 3 select","0");
+		mmc.defineConfig("Channel","Green-Bypass","RCM","L4.4 Laser 4 select","1");
+//Group: Red Bypass %
+		mmc.defineConfig("Channel","Red-Bypass","RCM","L5 Laser Wavelength","0.6400");
+		mmc.defineConfig("Channel","Red-Bypass","RCM","L4.1 Laser 1 select","0");
+		mmc.defineConfig("Channel","Red-Bypass","RCM","L4.2 Laser 2 select","0");
+		mmc.defineConfig("Channel","Red-Bypass","RCM","L4.3 Laser 3 select","0");
+		mmc.defineConfig("Channel","Red-Bypass","RCM","L4.4 Laser 4 select","1");			
+// Field of view////////////////////////////////////////////////////////////////
+
+//256
+		mmc.defineConfig("Field of View","256","RCM","C2 Field of view x","256");
+		mmc.defineConfig("Field of View","256","RCM","C2 Field of view y","256");
+		mmc.defineConfig("Field of View","256","RCM","S9 Line frequency","400");
+		mmc.defineConfig("Field of View","256","RCM","R6 Sweep factor","2");
+		mmc.defineConfig("Field of View","256","RCM","N1 Delay between images (ms)","170");
+		mmc.defineConfig("Field of View","256","RCM","N2 Sample Clock Rate for NI-DAQ","16000");
+		mmc.defineConfig("Field of View","256","RCM","C3 Fixed y step","0");
+		mmc.defineConfig("Field of View","256","RCM","C4 Y step size","1");
+
+//256 Super Fast Line frequency "800"
+		mmc.defineConfig("Field of View","256 SF","RCM","C2 Field of view x","256");
+		mmc.defineConfig("Field of View","256 SF","RCM","C2 Field of view y","256");
+		mmc.defineConfig("Field of View","256 SF","RCM","S9 Line frequency","800");
+		mmc.defineConfig("Field of View","256 SF","RCM","R6 Sweep factor","2");
+		mmc.defineConfig("Field of View","256 SF","RCM","N1 Delay between images (ms)","5");
+		mmc.defineConfig("Field of View","256 SF","RCM","N2 Sample Clock Rate for NI-DAQ","32000");
+		mmc.defineConfig("Field of View","256 SF","RCM","C3 Fixed y step","1");
+		mmc.defineConfig("Field of View","256 SF","RCM","C4 Y step size","4");
+
+//512
+		mmc.defineConfig("Field of View","512","RCM","C2 Field of view x","512");//ConfigGroup,Field of View,512,RCM,C2 Field of view x,512
+		mmc.defineConfig("Field of View","512","RCM","C2 Field of view y","512");//ConfigGroup,Field of View,512,RCM,C2 Field of view y,512
+		mmc.defineConfig("Field of View","512","RCM","S9 Line frequency","400");
+		mmc.defineConfig("Field of View","512","RCM","R6 Sweep factor","2");
+		mmc.defineConfig("Field of View","512","RCM","N1 Delay between images (ms)","170");//ConfigGroup,Field of View,512,RCM,N1 Delay between images (ms),170
+		mmc.defineConfig("Field of View","512","RCM","N2 Sample Clock Rate for NI-DAQ","16000");//ConfigGroup,Field of View,512,RCM,N2 Sample Clock Rate for NI-DAQ,16000
+		mmc.defineConfig("Field of View","512","RCM","C3 Fixed y step","0");//ConfigGroup,Field of View,512,RCM,C3 Fixed y step,0
+		mmc.defineConfig("Field of View","512","RCM","C4 Y step size","1");//ConfigGroup,Field of View,512,RCM,C4 Y step size,1
+
+//512 Super Fast Line frequency","600"
+		mmc.defineConfig("Field of View","512 SF","RCM","C2 Field of view x","512");
+		mmc.defineConfig("Field of View","512 SF","RCM","C2 Field of view y","512");
+		mmc.defineConfig("Field of View","512 SF","RCM","S9 Line frequency","800");
+		mmc.defineConfig("Field of View","512 SF","RCM","R6 Sweep factor","2");
+		mmc.defineConfig("Field of View","512 SF","RCM","N1 Delay between images (ms)","5");
+		mmc.defineConfig("Field of View","512 SF","RCM","N2 Sample Clock Rate for NI-DAQ","32000");
+		mmc.defineConfig("Field of View","512 SF","RCM","C3 Fixed y step","1");
+		mmc.defineConfig("Field of View","512 SF","RCM","C4 Y step size","4");
+
+//1024
+		mmc.defineConfig("Field of View","1024","RCM","C2 Field of view x","1024");
+		mmc.defineConfig("Field of View","1024","RCM","C2 Field of view y","1024");
+		mmc.defineConfig("Field of View","1024","RCM","S9 Line frequency","400");
+		mmc.defineConfig("Field of View","1024","RCM","R6 Sweep factor","2");
+		mmc.defineConfig("Field of View","1024","RCM","N1 Delay between images (ms)","170");
+		mmc.defineConfig("Field of View","1024","RCM","N2 Sample Clock Rate for NI-DAQ","16000");
+		mmc.defineConfig("Field of View","1024","RCM","C3 Fixed y step","0");
+		mmc.defineConfig("Field of View","1024","RCM","C4 Y step size","1");
+
+//2048
+		mmc.defineConfig("Field of View","2048","RCM","C2 Field of view x","2048");
+		mmc.defineConfig("Field of View","2048","RCM","C2 Field of view y","2048");
+		mmc.defineConfig("Field of View","2048","RCM","S9 Line frequency","400");
+		mmc.defineConfig("Field of View","2048","RCM","R6 Sweep factor","2");
+		mmc.defineConfig("Field of View","2048","RCM","N1 Delay between images (ms)","170");
+		mmc.defineConfig("Field of View","2048","RCM","N2 Sample Clock Rate for NI-DAQ","16000");
+		mmc.defineConfig("Field of View","2048","RCM","C3 Fixed y step","0");
+		mmc.defineConfig("Field of View","2048","RCM","C4 Y step size","1");
+
+//2048 XL Sweep factor","1"
+		mmc.defineConfig("Field of View","2048 XL","RCM","C2 Field of view x","2048");
+		mmc.defineConfig("Field of View","2048 XL","RCM","C2 Field of view y","2048");
+		mmc.defineConfig("Field of View","2048 XL","RCM","S9 Line frequency","400");
+		mmc.defineConfig("Field of View","2048 XL","RCM","R6 Sweep factor","1");
+		mmc.defineConfig("Field of View","2048 XL","RCM","N1 Delay between images (ms)","170");
+		mmc.defineConfig("Field of View","2048 XL","RCM","N2 Sample Clock Rate for NI-DAQ","16000");
+		mmc.defineConfig("Field of View","2048 XL","RCM","C3 Fixed y step","0");
+		mmc.defineConfig("Field of View","2048 XL","RCM","C4 Y step size","1");
+
+//2048 4x average Line frequency","100"
+		mmc.defineConfig("Field of View","2048 avg4","RCM","C2 Field of view x","2048");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","C2 Field of view y","2048");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","S5 Offset rescan X","0.1000");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","S6 Offset rescan Y","-0.0400");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","S9 Line frequency","100");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","R6 Sweep factor","2");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","N1 Delay between images (ms)","170");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","N2 Sample Clock Rate for NI-DAQ","16000");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","C3 Fixed y step","0");
+		mmc.defineConfig("Field of View","2048 avg4","RCM","C4 Y step size","1");
+		}
+void mcl(){
+//# Group: XZ Step Size
+		mmc.defineconfig("XZ Step Size","NewPreset","RCM","Z5 Z stepper resolution (um)","0.5000");
+		mmc.defineConfig("XZ Imaging","Enable","RCM","Z2 Enable XZ","1");//ConfigGroup,XZ Imaging,Enable,RCM,Z2 Enable XZ,1
+		mmc.defineConfig("XZ Imaging","Disable","RCM","Z2 Enable XZ","0");//ConfigGroup,XZ Imaging,Disable,RCM,Z2 Enable XZ,0
+		mmc.defineConfig("XZ Range", "NewPreset", "RCM", "Z3 Z stepper range (um)", "3.0000");//ConfigGroup,XZ Range,NewPreset,RCM,Z3 Z stepper range (um),3.0000
+		mmc.setProperty("RCM","Z4 Z stepper scale (mV/um)","384.6150");
+		
+}	
+void ham(){
+mmc.setProperty("Core", "Camera","HamamatsuHam_DCAM");//Property,Core,Camera,HamamatsuHam_DCAM
+		mmc.defineConfig("Channel","Blue-Bypass","HamamatsuHam_DCAM","TRIGGER ACTIVE","LEVEL");
+		mmc.defineConfig("Channel","Blue-Bypass","HamamatsuHam_DCAM","TRIGGER SOURCE","INTERNAL");
+		mmc.defineConfig("Channel","Blue-Bypass","HamamatsuHam_DCAM","TriggerPolarity","POSITIVE");
+
+		mmc.defineConfig("Channel","Green-Bypass","HamamatsuHam_DCAM","TRIGGER ACTIVE","LEVEL");
+		mmc.defineConfig("Channel","Green-Bypass","HamamatsuHam_DCAM","TRIGGER SOURCE","INTERNAL");
+		mmc.defineConfig("Channel","Green-Bypass","HamamatsuHam_DCAM","TriggerPolarity","POSITIVE");
+
+		mmc.defineConfig("Channel","Red-Bypass","HamamatsuHam_DCAM","TRIGGER ACTIVE","LEVEL");
+		mmc.defineConfig("Channel","Red-Bypass","HamamatsuHam_DCAM","TRIGGER SOURCE","INTERNAL");
+		mmc.defineConfig("Channel","Red-Bypass","HamamatsuHam_DCAM","TriggerPolarity","POSITIVE");
+		
+		mmc.defineConfig("Channel","488","HamamatsuHam_DCAM","TRIGGER ACTIVE","LEVEL");
+		mmc.defineConfig("Channel","488","HamamatsuHam_DCAM","TRIGGER SOURCE","EXTERNAL");
+		mmc.defineConfig("Channel","488","HamamatsuHam_DCAM","TriggerPolarity","POSITIVE");
+		
+		mmc.defineConfig("Channel","561","HamamatsuHam_DCAM","TRIGGER ACTIVE","LEVEL");
+		mmc.defineConfig("Channel","561","HamamatsuHam_DCAM","TRIGGER SOURCE","EXTERNAL");
+		mmc.defineConfig("Channel","561","HamamatsuHam_DCAM","TriggerPolarity","POSITIVE");
+		
+		mmc.defineConfig("Channel","640","HamamatsuHam_DCAM","TRIGGER ACTIVE","LEVEL");
+		mmc.defineConfig("Channel","640","HamamatsuHam_DCAM","TRIGGER SOURCE","EXTERNAL");
+		mmc.defineConfig("Channel","640","HamamatsuHam_DCAM","TriggerPolarity","POSITIVE");		
+		
+		mmc.defineConfig("Channel","785","HamamatsuHam_DCAM","TRIGGER ACTIVE","LEVEL");
+		mmc.defineConfig("Channel","785","HamamatsuHam_DCAM","TRIGGER SOURCE","EXTERNAL");
+		mmc.defineConfig("Channel","785","HamamatsuHam_DCAM","TriggerPolarity","POSITIVE");
+}	
+void core(){
+mmc.defineConfig("Channel","488","Core","Shutter","RCM");
+		mmc.defineConfig("Channel","561","Core","Shutter","RCM");
+		mmc.defineConfig("Channel","640","Core","Shutter","RCM");
+		mmc.defineConfig("Channel","785","Core","Shutter","RCM");
+}	
+void pe4000(){
+//EPI 405
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","ChannelA","405");
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","ChannelB","470");
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","ChannelC","550");
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","ChannelD","740");
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","SelectionA","1");
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","SelectionB","0");
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","SelectionC","0");
+		mmc.defineConfig("Channel","Blue-Bypass","pE4000","SelectionD","0");
+		mmc.defineConfig("Channel","Blue-Bypass","Core","Shutter","pE4000");
+
+//EPI 490
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","ChannelA","405");
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","ChannelB","470");
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","ChannelC","550");
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","ChannelD","740");
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","SelectionA","0");
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","SelectionB","1");
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","SelectionC","0");
+		mmc.defineConfig("Channel","Green-Bypass","pE4000","SelectionD","0");
+		mmc.defineConfig("Channel","Green-Bypass","Core","Shutter","pE4000");
+
+//EPI 561
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","ChannelA","405");
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","ChannelB","470");
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","ChannelC","550");
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","ChannelD","740");
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","SelectionA","0");
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","SelectionB","0");
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","SelectionC","1");
+		mmc.defineConfig("Channel","Red-Bypass","pE4000","SelectionD","0");
+		mmc.defineConfig("Channel","Red-Bypass","Core","Shutter","pE4000");
+
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","ChannelA","405");
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","ChannelB","470");
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","ChannelC","550");
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","ChannelD","740");
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","SelectionA","0");
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","SelectionB","0");
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","SelectionC","0");
+		mmc.defineConfig("Channel","NIR-Bypass","pE4000","SelectionD","1");
+		mmc.defineConfig("Channel","NIR-Bypass","Core","Shutter","pE4000");
+}	
+void TiFB(){
+//# Group: 405			
+mmc.defineConfig("Channel","405","TIFilterBlock1","State","5");
+mmc.defineConfig("Channel","488","TIFilterBlock1","State","5");
+mmc.defineConfig("Channel","561","TIFilterBlock1","State","5");
+mmc.defineConfig("Channel","640","TIFilterBlock1","State","5");
+mmc.defineConfig("Channel","Blue-Bypass","TIFilterBlock1","State","0");
+mmc.defineConfig("Channel","Green-Bypass","TIFilterBlock1","State","2");
+mmc.defineConfig("Channel","Red-Bypass","TIFilterBlock1","State","3");
+mmc.defineConfig("Channel","NIR-Bypass","TIFilterBlock1","State","4");
+}
+void TiLP(){
+	
+mmc.defineConfig("Channel","405","TILightPath","State","1");
+mmc.defineConfig("Channel","488","TILightPath","State","1");
+mmc.defineConfig("Channel","561","TILightPath","State","1");
+mmc.defineConfig("Channel","640","TILightPath","State","1");
+mmc.defineConfig("Channel","Blue-Bypass","TILightPath","State","1");
+mmc.defineConfig("Channel","Green-Bypass","TILightPath","State","1");
+mmc.defineConfig("Channel","Red-Bypass","TILightPath","State","1");
+mmc.defineConfig("Channel","NIR-Bypass","TILightPath","State","1");
+		
+}	
+void TiObj(){
+	String[] objNames = new String[] { "1x", "2x", "3x", "4x", "5x", "6x" };
+	mmc.defineConfig("Objective Lens",objNames[0],"TINosePiece","State","0");
+	mmc.defineConfig("Objective Lens",objNames[1],"TINosePiece","State","1");
+	mmc.defineConfig("Objective Lens",objNames[2],"TINosePiece","State","2");
+	mmc.defineConfig("Objective Lens",objNames[3],"TINosePiece","State","3");
+	mmc.defineConfig("Objective Lens",objNames[4],"TINosePiece","State","4");
+	mmc.defineConfig("Objective Lens",objNames[5],"TINosePiece","State","5");
+mm.refreshGUI();
+
+
+}	
+	switch( device ) 
+	{		
+//RCM
+	case "RCM":
+		rcm();
+		break;
+	case "MCL NanoDrive Z Stage": //Device,MCL NanoDrive Z Stage,MCL_NanoDrive,MCL NanoDrive Z Stage
+		mcl();
+		break;
+	case "HamamatsuHam_DCAM"://Device,HamamatsuHam_DCAM,HamamatsuHam,HamamatsuHam_DCAM
+		ham();					
+		break;
+	case "Core":
+		core();
+		break;
+	case "pE4000":
+		pe4000();
+		break;
+	case "TIFilterBlock1":
+		TiFB();
+		break;
+	case "TILightPath":
+		TiLP();
+		break;
+	case "TINosePiece":
+		TiObj();
+		break;
+	default:
+		break;
+}
+
+mm.scripter().message("\nCONFIGURING Presets...");
+mm.scripter().message("\nCOMPLETE...");
+
+}
+
+
+//Configuration complete
+mm.scripter().message("\nProgram COMPLETE...");
+mm.refreshGUI();
