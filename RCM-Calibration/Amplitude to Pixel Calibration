@@ -1,0 +1,81 @@
+/*
+ * Semi Automatic RCM scanner amplitude calibration script
+ * does not involve image processing
+ * Aurthor: Amit Cherian, Confocal.nl
+ *	
+ */
+ 
+proceed=true;
+double ampStep=0.0150;
+//User input to accept the calibration
+while(proceed){
+gd = new ij.gui.GenericDialog("scan X Amplitude Calibration");
+        gd.addMessage("Increase or Decrease the Amplitude until it matches the set ROI");
+        gd.enableYesNoCancel("Decrease Amplitude", "Increase amplitude");
+        gd.setCancelLabel("Set!");
+        gd.showDialog();
+        if (gd.wasCanceled())
+        {
+            proceed=false;
+            IJ.log("X Amplitude set!");
+            break;
+        }   
+        else if (gd.wasOKed())
+        {	
+        		
+        		initXamp=Double.parseDouble(mmc.getProperty("RCM","S1 Amplitude scan X"));
+        		double newtXamp=initXamp-ampStep;
+            mmc.setProperty("RCM","S1 Amplitude scan X",newtXamp);
+            mm.refreshGUI();
+            IJ.log("Reduced Amplitude");
+            
+        }
+        else
+            {
+            	
+            	initXamp=Double.parseDouble(mmc.getProperty("RCM","S1 Amplitude scan X"));
+            	double newtXamp=initXamp+ampStep;
+            	mmc.setProperty("RCM","S1 Amplitude scan X",newtXamp);
+            	mm.refreshGUI();
+            	IJ.log("Increased amplitude");
+            	
+            }
+}
+
+//Y scan 
+proceed=true;
+double ampStep=0.0150;
+//User input to accept the calibration
+while(proceed){
+gd = new ij.gui.GenericDialog("scan Y Amplitude Calibration");
+        gd.addMessage("Increase or Decrease the Amplitude until it matches the set ROI");
+        gd.enableYesNoCancel("Decrease Amplitude", "Increase amplitude");
+        gd.setCancelLabel("Set!");
+        gd.showDialog();
+        if (gd.wasCanceled())
+        {
+            proceed=false;
+            IJ.log("Y Amplitude set!");
+            break;
+        }   
+        else if (gd.wasOKed())
+        {	
+        		
+        		double initYamp=Double.parseDouble(mmc.getProperty("RCM","S2 Amplitude scan Y"));
+        		double newYamp=initYamp-ampStep;
+            mmc.setProperty("RCM","S2 Amplitude scan Y",newYamp);
+            mm.refreshGUI();
+            IJ.log("Reduced Amplitude");
+            
+        }
+        else
+            {
+            	
+            	double initYamp=Double.parseDouble(mmc.getProperty("RCM","S2 Amplitude scan Y"));
+            	double newYamp=initYamp+ampStep;
+            	mmc.setProperty("RCM","S2 Amplitude scan Y",newYamp);
+            	mm.refreshGUI();
+            	IJ.log("Increased amplitude");
+            	
+            }
+}
